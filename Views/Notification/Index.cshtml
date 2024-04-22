@@ -1,0 +1,72 @@
+﻿@model List<NotificationsView.Models.NotificationDetail>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="row hello-box">
+    <div class="col-sm-6 me-auto my-auto">
+        <h2 class="txt-head1">Manage Notifications</h2>
+    </div>
+</div>
+
+<div class="main-content">
+    <div class="row">
+        <div class="col-md-6">
+            <label class="control-label" for="LocationDropDown">Location</label>
+            @Html.DropDownListFor(model => model.First().LC_ID, new SelectList(ViewBag.EmployeeDropDown, "Value", "Text"), "-- Select Location --", new { @class = "form-control", id = "LocationDropDown" })
+        </div>
+        <div class="col-md-6">
+            <label class="control-label" for="NotificationDateTxtBox">Notification Date</label>
+            <input type="date" class="form-control" id="NotificationDateTxtBox" name="NotificationDateTxtBox" placeholder="Enter Date" />
+        </div>
+    </div>
+    <div class="row mt-2">
+        <div class="col-md-12">
+            <label class="control-label" for="DescriptionTxtBox">Notification Description</label>
+            <span class="text-danger" id="ErrorLabel"></span>
+            <textarea class="form-control" id="DescriptionTxtBox" name="DescriptionTxtBox" rows="4" placeholder="Enter Notification Description" style="width: 100%;"></textarea>
+        </div>
+    </div>
+    <div class="row mt-2">
+        <div class="col-md-12">
+            <!-- Buttons for Save and Cancel -->
+            <button type="button" class="btn btn-primary" id="RequestSaveButton">Save</button>
+            <button type="button" class="forgot_submit btn btn-secondary" id="UpdateBtn" style="display:none;">Update</button>
+            <button type="button" class="forgot_cancel btn btn-secondary" id="CancelUpdateBtn" style="display:none;">Cancel</button>
+        </div>
+    </div>
+    <div class="row mt-2">
+        <div class="col-md-12">
+            <table class="table custom-gridview" id="NotificationGridView">
+                <thead>
+                    <tr>
+                        <th>Sr#</th>
+                        <th>Notification ID</th>
+                        <th>Location</th>
+                        <th>Notification Date</th>
+                        <th>Notification Description</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var notification in Model)
+                    {
+                        <tr>
+                            <td>@notification.ND_ID</td>
+                            <td>@notification.LC_ID</td>
+                            <td>@notification.ND_Date.ToShortDateString()</td>
+                            <td>@notification.ND_Description</td>
+                            <td>@notification.ND_Status</td>
+                            <td>
+                                <button type="button" class="edit-icon" data-id="@notification.ND_ID">Edit</button>
+                                <button type="button" class="edit-icon" data-id="@notification.ND_ID">Delete</button>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

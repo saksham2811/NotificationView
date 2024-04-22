@@ -14,6 +14,8 @@
     <div class="row">
         <div class="col-md-6">
             <label class="control-label" for="LocationDropDown">Location</label>
+            @Html.DropDownListFor(model => model.First().LC_ID, new SelectList(ViewBag.EmployeeDropDown, "Value", "Text"), "-- Select Location --", new { @class = "form-control", id = "LocationDropDown" })
+
         </div>
         <div class="col-md-6">
             <label class="control-label" for="NotificationDateTxtBox">Notification Date</label>
